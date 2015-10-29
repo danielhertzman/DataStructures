@@ -1,0 +1,4 @@
+Instructions to my very simple application
+
+Enter a key value in the text field. Use 'Find' to find the value from the key.
+Use 'Remove' to delete the key with its value. Use 'Show table' to list all values.
