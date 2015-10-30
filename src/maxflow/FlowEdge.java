@@ -29,6 +29,10 @@ public class FlowEdge {
 		return flow;
 	}
 	
+	public boolean visited() {
+		return visited;
+	}
+	
 	public int other(int vertex) {
 		if (vertex == v)
 			return w;
