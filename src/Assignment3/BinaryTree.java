@@ -1,5 +1,11 @@
 package Assignment3;
 
+/**
+ * Class that represents a binary search tree
+ * 
+ * @author danielhertzman-ericson
+ *
+ */
 public class BinaryTree {
 
 	private TreeNode root;
@@ -8,6 +14,10 @@ public class BinaryTree {
 		this.root = null;
 	}
 	
+	/**
+	 * Adds new elements to the tree
+	 * @param data the data to be inserted
+	 */
 	public void add (int data) {
 		TreeNode newNode = new TreeNode(data);
 		if (root ==  null){
@@ -19,6 +29,13 @@ public class BinaryTree {
 		
 	}
 	
+	/**
+	 * Actually inserts the new elements to the tree
+	 * It returns a new node for every node inserted
+	 * @param current
+	 * @param newNode
+	 * @return
+	 */
 	public TreeNode insert(TreeNode current, TreeNode newNode){
 		
 		if (current == null) {

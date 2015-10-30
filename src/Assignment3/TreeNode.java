@@ -108,7 +108,7 @@ public class TreeNode {
 		bt.delete(7);
 		bt.print();
 		System.out.println("--------------------------");
-		bt.delete(3);
+		bt.delete(1);
 		bt.print();
 		System.out.println("--------------------------");
 		
