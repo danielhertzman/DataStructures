@@ -34,7 +34,7 @@ public class BinaryTree {
 	 * It returns a new node for every node inserted
 	 * @param current
 	 * @param newNode
-	 * @return
+	 * @return a new inserted node
 	 */
 	public TreeNode insert(TreeNode current, TreeNode newNode){
 		
@@ -70,10 +70,24 @@ public class BinaryTree {
  				
 	}
 	
+	/**
+	 * Calls the remove method
+	 * that deletes a node with
+	 * a specific data
+	 * @param data
+	 */
 	public void delete (int data){
 		root = remove (root, data);
 	}
 	
+	/**
+	 * Removes a node with a specific
+	 * data. The method starts iterating
+	 * from the node that is sent in to the param
+	 * @param node
+	 * @param data
+	 * @return the deleted node
+	 */
 	public TreeNode remove (TreeNode node, int data){
 		if (node.getData() == data) {
 
