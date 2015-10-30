@@ -1,4 +1,4 @@
-package bipartite;
+package maxflow;
 
 public class Graph {
 
