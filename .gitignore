@@ -1,6 +1,5 @@
 /bin/
 .classpath
 .project
-.idea/
-DataStructures.iml.iml
+DataStructures.iml
 .settings
