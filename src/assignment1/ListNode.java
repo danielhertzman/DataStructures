@@ -1,4 +1,4 @@
-package Assignment1;
+package assignment1;
 
 /**
  * Represents every node in a linked list. 
