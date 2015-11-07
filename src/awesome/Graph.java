@@ -80,6 +80,7 @@ public class Graph {
 	
 	public int ff(int[][] graph, int s, int t) {
 		
+		int u = -1, v = -1;
 		int maxflow = 0;
 		int[][] residualGraph = new int[size][size];
 		
@@ -92,10 +93,10 @@ public class Graph {
 		while (DFS(residualGraph, s, t)) {
 			
 			int flowCapacity = Integer.MAX_VALUE;
-			int v = t;
+			v = t;
 			
 			while (v != s) {
-				int u = path[v];
+				u = path[v];
 				flowCapacity = Math.min(residualGraph[u][v], flowCapacity);
 				v = u;
 			}
@@ -103,11 +104,11 @@ public class Graph {
 			v = t;
 				
 			while (v != s){
-				int u = path[v];
+				u = path[v];
 				residualGraph[u][v] -= flowCapacity;
 				residualGraph[v][u] += flowCapacity;
 				v = u;
-				System.out.println("vänsternod: " + v + "högernod: " + u);
+				
 			}
 			
 			maxflow += flowCapacity;
@@ -115,6 +116,7 @@ public class Graph {
 //			System.out.println(path[]);
 			
 		}
+		System.out.println("vänsternod: " + v + "högernod: " + u);
 		return maxflow;
 	}
 	
