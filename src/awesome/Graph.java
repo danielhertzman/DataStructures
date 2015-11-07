@@ -107,6 +107,7 @@ public class Graph {
 				residualGraph[u][v] -= flowCapacity;
 				residualGraph[v][u] += flowCapacity;
 				v = u;
+				System.out.println("vänsternod: " + v + "högernod: " + u);
 			}
 			
 			maxflow += flowCapacity;
