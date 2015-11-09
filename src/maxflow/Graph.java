@@ -2,7 +2,12 @@ package maxflow;
 import javax.swing.JOptionPane;
 import assignment1.*;
 
-
+/**
+ * Class that represent a bipartite match via max flow using the 
+ * Ford Fulkerson algorithm
+ * @author danielhertzman-ericson & Carl Haraldsson Klintenberg
+ *
+ */
 public class Graph {
 	
 	private int[][] graph; // Creates a 2-deminsional graph.
