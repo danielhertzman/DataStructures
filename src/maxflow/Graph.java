@@ -41,8 +41,22 @@ public class Graph {
 			graph[i][graph.length-1] = 1;
 		}
 		
-		for (int i = 0; i < size -2; i++)  // Creates a connection from a chosen left-node to a chosen right-node.
-			makeConnections(Integer.parseInt(JOptionPane.showInputDialog("Gör connection från vänsternod..")), Integer.parseInt(JOptionPane.showInputDialog("...till högernod...")));		
+		while (true) { // Creates a connection from a chosen left-node to a chosen right-node.
+			
+			int r, l;
+			int yes;
+			
+			r = Integer.parseInt(JOptionPane.showInputDialog("Ange connection från vänsternod..."));
+			l = Integer.parseInt(JOptionPane.showInputDialog("...till högernod.."));
+			
+			yes = JOptionPane.showConfirmDialog(null, "Är du färdig?");	
+			if(yes == JOptionPane.YES_OPTION) {
+				break;
+			} else {
+				makeConnections(r, l);
+			}		
+			
+		}
 		
 	}
 	
@@ -162,30 +176,14 @@ public class Graph {
 				}
 				v = u;
 				
-				
 			}
 			
 			maxflow += flowCapacity;
-			
-//			System.out.println(path[]);
-			
+						
 		}
+		
 		return maxflow;
 	}
-	
-	
-
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	
 /***********************************************************************************************/
