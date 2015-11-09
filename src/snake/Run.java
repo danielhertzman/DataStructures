@@ -1,4 +1,4 @@
-package test;
+package snake;
 
 public class Run {
 	

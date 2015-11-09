@@ -1,4 +1,4 @@
-package Assignment2;
+package assignment2;
 
 /**
  * Represents an entry in the hash table.
