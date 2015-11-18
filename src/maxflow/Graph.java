@@ -17,7 +17,8 @@ public class Graph {
 	private int[] path; // Creating an array 'path', this array will hold the path that has been chosen.
 	private int size; // 'size' will represent the size of the each array in the 2-dimensional array.
 	private boolean[] visited; // Creating an array 'visited' which will remember the positions in the 2-D array that we have visited.
-	
+
+
 	/**
 	 * Creates a Graph, the user will assign the amount of nodes that the graph will contain.
 	 */
