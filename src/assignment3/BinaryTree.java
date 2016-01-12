@@ -8,10 +8,13 @@ package assignment3;
  */
 public class BinaryTree {
 
-	private TreeNode root;
+	protected TreeNode root;
+	protected int size;
 	
 	public BinaryTree(){
+
 		this.root = null;
+		size = 0;
 	}
 	
 	/**
@@ -22,9 +25,11 @@ public class BinaryTree {
 		TreeNode newNode = new TreeNode(data);
 		if (root ==  null){
 			root = newNode;
+			size++;
 		}
 		else {
 			root = insert(root, newNode);
+			size++;
 		}
 		
 	}
@@ -62,8 +67,7 @@ public class BinaryTree {
 		else if (current.getData() == newNode.getData()) {
 			try {
 				throw new Exception();
-			} catch (Exception e) {
-			}
+			} catch (Exception e) {}
 		}
 
 		return current;
@@ -77,7 +81,13 @@ public class BinaryTree {
 	 * @param data
 	 */
 	public void delete (int data){
-		root = remove (root, data);
+
+		TreeNode node = remove(root, data);
+
+		if (node != null) {
+			root = node;
+			size--;
+		}
 	}
 	
 	/**
@@ -89,6 +99,10 @@ public class BinaryTree {
 	 * @return the deleted node
 	 */
 	public TreeNode remove (TreeNode node, int data){
+
+		TreeNode temp = find(node, data);
+		System.out.println(temp.getData());
+
 		if (node.getData() == data) {
 
 			if (node.getLeft() == null && node.getRight() == null) {
@@ -156,10 +170,46 @@ public class BinaryTree {
 
 		return parent;
 	}
+
+	public TreeNode findParent(TreeNode current, TreeNode child) {
+
+		if (child == null)
+			return null;
+
+		else if (current.getData() > child.getData()) {
+			if (current.getLeft() == child)
+				return current;
+			else
+				return findParent(current.getLeft(), child);
+		}
+
+		else if (current.getData() < child.getData()) {
+			if (current.getRight() == child)
+				return current;
+			else
+				return findParent(current.getRight(), child);
+		}
+
+		return null;
+
+	}
 	
-//	private void inOrder(TreeNode current){
-//		
-//	}
+	public void inOrder(TreeNode current){
+
+		if (current == null) {
+			inOrder(root);
+		} else {
+
+			if (current.getLeft() != null) {
+				inOrder(current.getLeft());
+			}
+
+			System.out.println(current.getData());
+			if(current.getRight()!=null){
+				inOrder(current.getRight());
+			}
+		}
+	}
 	
 	public TreeNode find(TreeNode current, int data){
 		
@@ -177,8 +227,14 @@ public class BinaryTree {
 
 		return null;
 	}
+
+	public int getSize() {
+
+		return size;
+	}
 	
 	public void print (){
+
 		root.printTree();
 	}
 	
