@@ -59,7 +59,7 @@ public class TreeNode {
         leftHeight = left == null ? 0 : left.getHeight();
         rightHeight = right == null ? 0 : right.getHeight();
 
-        height = leftHeight >= rightHeight ? leftHeight + 1: rightHeight + 1;
+        height = leftHeight >= rightHeight ? leftHeight + 1 : rightHeight + 1;
 
     }
 
@@ -130,19 +130,19 @@ public class TreeNode {
         bt.add(4);
         bt.add(2);
         bt.add(0);
-        bt.printTree();
+        bt.print();
         bt.delete(11);
         System.out.println("--------------------------");
-        bt.printTree();
+        bt.print();
         System.out.println("--------------------------");
         bt.delete(14);
-        bt.printTree();
+        bt.print();
         System.out.println("--------------------------");
         bt.delete(7);
-        bt.printTree();
+        bt.print();
         System.out.println("--------------------------");
         bt.delete(1);
-        bt.printTree();
+        bt.print();
         System.out.println("--------------------------");
 
 

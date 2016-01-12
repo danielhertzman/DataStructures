@@ -2,240 +2,264 @@ package assignment3;
 
 /**
  * Class that represents a binary search tree
- * 
- * @author danielhertzman-ericson
  *
+ * @author danielhertzman-ericson
  */
 public class BinaryTree {
 
-	protected TreeNode root;
-	protected int size;
-	
-	public BinaryTree(){
+    protected TreeNode root;
+    protected int size;
 
-		this.root = null;
-		size = 0;
-	}
-	
-	/**
-	 * Adds new elements to the tree
-	 * @param data the data to be inserted
-	 */
-	public void add (int data) {
-		TreeNode newNode = new TreeNode(data);
-		if (root ==  null){
-			root = newNode;
-			size++;
-		}
-		else {
-			root = insert(root, newNode);
-			size++;
-		}
-		
-	}
-	
-	/**
-	 * Actually inserts the new elements to the tree
-	 * It returns a new node for every node inserted
-	 * @param current
-	 * @param newNode
-	 * @return a new inserted node
-	 */
-	public TreeNode insert(TreeNode current, TreeNode newNode){
-		
-		if (current == null) {
-			current = newNode;
-			return current;
-		}
+    public BinaryTree() {
 
-		else if (current.getData() > newNode.getData()) {
-			if (current.getLeft() == null) {
-				current.setLeft(new TreeNode(newNode.getData()));
-			} else {
-				insert(current.getLeft(), newNode);
-			}
-		}
-
-		else if (current.getData() < newNode.getData()) {
-			if (current.getRight() == null) {
-				current.setRight(new TreeNode(newNode.getData()));
-			} else {
-				insert(current.getRight(), newNode);
-			}
-		}
-
-		else if (current.getData() == newNode.getData()) {
-			try {
-				throw new Exception();
-			} catch (Exception e) {}
-		}
-
-		return current;
- 				
-	}
-	
-	/**
-	 * Calls the remove method
-	 * that deletes a node with
-	 * a specific data
-	 * @param data
-	 */
-	public void delete (int data){
-
-		TreeNode node = remove(root, data);
-
-		if (node != null) {
-			root = node;
-			size--;
-		}
-	}
-	
-	/**
-	 * Removes a node with a specific
-	 * data. The method starts iterating
-	 * from the node that is sent in to the param
-	 * @param node
-	 * @param data
-	 * @return the deleted node
-	 */
-	public TreeNode remove (TreeNode node, int data){
-
-		TreeNode temp = find(node, data);
-		System.out.println(temp.getData());
-
-		if (node.getData() == data) {
-
-			if (node.getLeft() == null && node.getRight() == null) {
-				node = null;
-
-			} else if (node.getLeft() != null && node.getRight() == null) {
-				TreeNode left = node.getLeft();
-				node.setData(left.getData());
-
-				node.setRight(left.getRight());
-				node.setLeft(left.getLeft());
-
-			} else if (node.getRight() != null && node.getLeft() == null) {
-				TreeNode right = node.getRight();
-				node.setData(right.getData());
-
-				node.setRight(right.getRight());
-				node.setLeft(right.getLeft());
-			}
-
-			else {
-				TreeNode successor = findSuccessor(node);
-				node.setData(successor.getData());
-
-				if (node.getRight() == successor) {
-					node.setRight(successor.getRight());
-
-				} else {
-					deleteSuccessor(node.getRight(), successor, null);
-
-				}
-			}
-
-		} else if (data < node.getData()) {
-			node.setLeft(remove(node.getLeft(), data));
-
-		} else if (data > node.getData()) {
-			node.setRight(remove(node.getRight(), data));
-		}
-
-		return node;
+        size = 0;
     }
-	
-	private TreeNode findSuccessor (TreeNode current){
-		TreeNode node = current.getRight();
-		while(node.getLeft() != null){
-			node = node.getLeft();
-		}
-		return node;
-	}
-	
-	private TreeNode deleteSuccessor(TreeNode node, TreeNode success, TreeNode parent){
-		if (success == node) {
-			parent.setLeft(node.getRight());
 
-		} else if (success.getData() < node.getData()) {
-			deleteSuccessor(node.getLeft(), success, node);
+    /**
+     * Adds the specified value to the tree recursively.
+     *
+     * @param data
+     */
+    public void add(int data) {
+
+        try {
+
+            root = insert(root, new TreeNode(data));
+            size++;
+
+        } catch (Exception e) {}
+    }
+
+    /**
+     * Used by add for recursively adding the newNode. Throws Exception if the value exists in the tree.
+     *
+     * @param current
+     * @param newNode
+     * @return The root for the new tree or subtree.
+     * @throws Exception
+     */
+    private TreeNode insert(TreeNode current, TreeNode newNode) throws Exception {
+
+        if (current == null) {
+
+            return newNode;
+
+        } else if (current.getData() == newNode.getData()) {
+            throw new Exception();
+
+        } else if (current.getData() > newNode.getData()) {
+            current.setLeft(insert(current.getLeft(), newNode));
+
+        } else if (current.getData() < newNode.getData()) {
+            current.setRight(insert(current.getRight(), newNode));
+        }
+
+        return current;
+    }
+
+    /**
+     * Removes the value from the tree, if it exists, recursively.
+     *
+     * @param data
+     */
+    public void delete(int data) {
+        TreeNode temp = remove(root, data);
+
+        if (temp != null) {
+            root = temp;
+            size--;
+        }
+    }
 
 
-		} else if (success.getData() > node.getData()) {
+    /**
+     * Removes the data from the tree with current as root.
+     *
+     * @param current
+     * @param data
+     * @return The root for the new tree or subtree.
+     */
+    private TreeNode remove(TreeNode current, int data) {
 
-			deleteSuccessor(node.getRight(), success, node);
+        TreeNode node = find(current, data);
 
-		}
+        if (node != null) {
 
-		return parent;
-	}
+            TreeNode successor = findSuccessor(node);
+            TreeNode successorParent = findParent(current, successor);
 
-	public TreeNode findParent(TreeNode current, TreeNode child) {
+            if (successorParent == node) {
 
-		if (child == null)
-			return null;
+                if (node.getData() < successor.getData()) {
 
-		else if (current.getData() > child.getData()) {
-			if (current.getLeft() == child)
-				return current;
-			else
-				return findParent(current.getLeft(), child);
-		}
+                    node.setRight(successor.getRight());
 
-		else if (current.getData() < child.getData()) {
-			if (current.getRight() == child)
-				return current;
-			else
-				return findParent(current.getRight(), child);
-		}
+                    if (node.getLeft() == null) {
+                        node.setLeft(successor.getLeft());
+                    }
 
-		return null;
+                } else {
+                    node.setRight(successor.getRight());
+                    node.setLeft(successor.getLeft());
+                }
 
-	}
-	
-	public void inOrder(TreeNode current){
+            } else if (successorParent.getLeft() != null) {
 
-		if (current == null) {
-			inOrder(root);
-		} else {
+                successorParent.setLeft(successor.getRight());
 
-			if (current.getLeft() != null) {
-				inOrder(current.getLeft());
-			}
+            } else if (successor == node) {
 
-			System.out.println(current.getData());
-			if(current.getRight()!=null){
-				inOrder(current.getRight());
-			}
-		}
-	}
-	
-	public TreeNode find(TreeNode current, int data){
-		
-		if (current.getData() == data) {
-			return current;
-		}
-		
-		else if (current.getData() > data) {
-			return find(current.getLeft(), data);
-		}
+                if (successorParent.getData() > successor.getData()) {
+                    successorParent.setLeft(null);
+                } else {
+                    successorParent.setRight(null);
+                }
+            }
+            node.setData(successor.getData());
+        }
+        return current;
+    }
 
-		else if (current.getData() < data) {
-			return find(current.getRight(), data);
-		}
+    /**
+     * Finds the node with the specified value in the tree with current as root.
+     *
+     * @param current
+     * @param data
+     * @return The node containing the specified value
+     */
+    public TreeNode find(TreeNode current, int data) {
 
-		return null;
-	}
+        if (current == null) {
+            return null;
 
-	public int getSize() {
+        } else if (current.getData() == data) {
+            return current;
 
-		return size;
-	}
-	
-	public void print (){
+        } else if (current.getData() > data) {
+            return find(current.getLeft(), data);
 
-		root.printTree();
-	}
-	
+        } else if (current.getData() < data) {
+            return find(current.getRight(), data);
+        }
+
+        return null;
+
+    }
+
+    /**
+     * Finds and returns the successor of the current node.
+     *
+     * @param current
+     * @return The successor of the current node
+     */
+    protected TreeNode findSuccessor(TreeNode current) {
+
+        TreeNode successor;
+
+        if (current == null) {
+            successor = null;
+
+        } else if (current.getRight() != null) {
+            if (current.getLeft() == null) {
+                successor = current.getRight();
+
+            } else {
+                successor = getMinimum(current.getRight());
+            }
+
+        } else if (current.getLeft() != null) {
+            successor = current.getLeft();
+
+        } else {
+            successor = current;
+        }
+
+        return successor;
+    }
+
+    /**
+     * Finds the parent TreeNode node for the child. Starts with the current.
+     *
+     * @param current
+     * @param child
+     * @return returns the parent TreeNode. Returns null if the node has no parents or is not found in the tree.
+     */
+    protected TreeNode findParent(TreeNode current, TreeNode child) {
+
+        if (child == null) {
+            return null;
+
+        } else if (current.getData() > child.getData()) {
+            if (current.getLeft() == child) {
+                return current;
+            } else {
+                return findParent(current.getLeft(), child);
+            }
+
+        } else if (current.getData() < child.getData()) {
+            if (current.getRight() == child) {
+                return current;
+            } else {
+                return findParent(current.getRight(), child);
+            }
+        }
+
+        return null;
+    }
+
+    /**
+     * Returns the minimum value(the leftmost child) of the tree with current as root.
+     *
+     * @param current
+     * @return The minimum value of the tree with current as root.
+     */
+    private TreeNode getMinimum(TreeNode current) {
+
+        if (current.getLeft() != null) {
+            return getMinimum(current.getLeft());
+
+        } else {
+            return current;
+        }
+    }
+
+    /**
+     * Prints the values of the tree, with current as root, in order.
+     *
+     * @param current
+     */
+    public void inOrder(TreeNode current) {
+
+        if (current == null) {
+            inOrder(root);
+
+        } else {
+
+            if (current.getLeft() != null) {
+                inOrder(current.getLeft());
+            }
+
+            System.out.println(current.getData());
+
+            if (current.getRight() != null) {
+                inOrder(current.getRight());
+            }
+        }
+    }
+
+    /**
+     * @return The size of the tree.
+     */
+    public int getSize() {
+
+        return size;
+    }
+
+    /**
+     * Prints the tree from the root.
+     */
+    public void print() {
+
+        root.printTree();
+    }
 }
