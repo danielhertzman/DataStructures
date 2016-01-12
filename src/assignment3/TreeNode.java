@@ -130,19 +130,19 @@ public class TreeNode {
         bt.add(4);
         bt.add(2);
         bt.add(0);
-        bt.print();
+        bt.printTree();
         bt.delete(11);
         System.out.println("--------------------------");
-        bt.print();
+        bt.printTree();
         System.out.println("--------------------------");
         bt.delete(14);
-        bt.print();
+        bt.printTree();
         System.out.println("--------------------------");
         bt.delete(7);
-        bt.print();
+        bt.printTree();
         System.out.println("--------------------------");
         bt.delete(1);
-        bt.print();
+        bt.printTree();
         System.out.println("--------------------------");
 
 
