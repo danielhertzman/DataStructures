@@ -1,7 +1,8 @@
 package assignment3;
 
 /**
- * Class that represents a binary search tree
+ * Class that represents a binary search tree. Is to be extended by
+ * an AVL-tree
  *
  * @author danielhertzman-ericson
  */
@@ -10,12 +11,20 @@ public class BinaryTree {
     protected TreeNode root;
     protected int size;
 
+    /**
+     * Constructor with sets size
+     * to 0 for every new tree
+     */
     public BinaryTree() {
 
         size = 0;
     }
 
 
+    /**
+     * Add an integer elemnet to the tree
+     * @param data
+     */
     public void add(int data) {
 
         try {
@@ -27,6 +36,14 @@ public class BinaryTree {
     }
 
 
+    /**
+     * Inserts the element to the tree. Throws Exception if
+     * data is equal to data already stored in the tree.
+     * @param current
+     * @param newNode
+     * @return
+     * @throws Exception
+     */
     private TreeNode insert(TreeNode current, TreeNode newNode) throws Exception {
 
         if (current == null) {
@@ -47,6 +64,10 @@ public class BinaryTree {
     }
 
 
+    /**
+     * Delete an integer data from tree
+     * @param data
+     */
     public void delete(int data) {
         TreeNode temp = remove(root, data);
 
@@ -56,7 +77,13 @@ public class BinaryTree {
         }
     }
 
-
+    /**
+     * Removes the node containing the data specified in the
+     * delete method
+     * @param current
+     * @param data
+     * @return
+     */
     private TreeNode remove(TreeNode current, int data) {
 
         TreeNode node = find(current, data);
@@ -98,7 +125,13 @@ public class BinaryTree {
         return current;
     }
 
-    public TreeNode find(TreeNode current, int data) {
+    /**
+     * Find a node with a data
+     * @param current
+     * @param data
+     * @return
+     */
+    private TreeNode find(TreeNode current, int data) {
 
         if (current == null) {
             return null;
@@ -117,6 +150,11 @@ public class BinaryTree {
 
     }
 
+    /**
+     * Find the successor node to a specified node
+     * @param current
+     * @return
+     */
     protected TreeNode findSuccessor(TreeNode current) {
 
         TreeNode successor;
@@ -129,7 +167,7 @@ public class BinaryTree {
                 successor = current.getRight();
 
             } else {
-                successor = getMinimum(current.getRight());
+                successor = getLeftMost(current.getRight());
             }
 
         } else if (current.getLeft() != null) {
@@ -142,6 +180,12 @@ public class BinaryTree {
         return successor;
     }
 
+    /**
+     * Find a parent to a child node
+     * @param current
+     * @param child
+     * @return
+     */
     protected TreeNode findParent(TreeNode current, TreeNode child) {
 
         if (child == null) {
@@ -165,10 +209,15 @@ public class BinaryTree {
         return null;
     }
 
-    private TreeNode getMinimum(TreeNode current) {
+    /**
+     * Get the left-most node
+     * @param current
+     * @return
+     */
+    private TreeNode getLeftMost(TreeNode current) {
 
         if (current.getLeft() != null) {
-            return getMinimum(current.getLeft());
+            return getLeftMost(current.getLeft());
 
         } else {
             return current;
@@ -194,11 +243,18 @@ public class BinaryTree {
         }
     }
 
+    /**
+     * Returns size of the tree
+     * @return
+     */
     public int getSize() {
 
         return size;
     }
-    
+
+    /**
+     * Prints the tree
+     */
     public void print() {
 
         root.printTree();

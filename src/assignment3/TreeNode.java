@@ -1,6 +1,8 @@
 package assignment3;
 
 /**
+ * Class that represent a single node in a binary tree
+ *
  * @author danielhertzman-ericson
  */
 public class TreeNode {
@@ -9,11 +11,13 @@ public class TreeNode {
     private TreeNode left;
     private TreeNode right;
     private int height;
+    private int leftHeight;
+    private int rightHeight;
 
     public TreeNode(int data) {
 
         this.data = data;
-        height = 0;
+
     }
 
     public void setData(int data) {
@@ -51,10 +55,12 @@ public class TreeNode {
         return height;
     }
 
+    /**
+     * Sets the height of the tree by calculating the height
+     * of left and right side. The one that is highest sets the height
+     * of the tree
+     */
     public void setHeight() {
-
-        int leftHeight;
-        int rightHeight;
 
         leftHeight = left == null ? 0 : left.getHeight();
         rightHeight = right == null ? 0 : right.getHeight();
@@ -63,15 +69,16 @@ public class TreeNode {
 
     }
 
+    /**
+     * Returns the difference between the left and right height
+     * @return
+     */
     public int getDifference() {
 
-        int leftSide;
-        int rightSide;
+        leftHeight = left == null ? 0 : left.getHeight();
+        rightHeight = right == null ? 0 : right.getHeight();
 
-        leftSide = left == null ? 0 : left.getHeight();
-        rightSide = right == null ? 0 : right.getHeight();
-
-        return leftSide - rightSide;
+        return leftHeight - rightHeight;
     }
 
 
@@ -112,40 +119,60 @@ public class TreeNode {
         System.out.print('\n');
     }
 
-    public static void main(String[] args) {
-        BinaryTree bt = new BinaryTree();
+    /*
+    Compare the result from BinaryTree and AVLTree
+     */
+//    public static void main(String[] args) {
+////        BinaryTree tree = new BinaryTree();
+//        AVLTree tree = new AVLTree();
+//
+//        tree.add(7);
+//        tree.add(11);
+//        tree.add(3);
+//        tree.add(13);
+//        tree.add(9);
+//        tree.add(5);
+//        tree.add(1);
+//        tree.add(14);
+//        tree.add(12);
+//        tree.add(10);
+//        tree.add(8);
+//        tree.add(6);
+//        tree.add(4);
+//        tree.add(2);
+//        tree.add(0);
+//        tree.print();
+//        tree.delete(11);
+//        System.out.println("--------------------------");
+//        tree.print();
+//        System.out.println("--------------------------");
+//        tree.delete(14);
+//        tree.print();
+//        System.out.println("--------------------------");
+//        tree.delete(7);
+//        tree.print();
+//        System.out.println("--------------------------");
+//        tree.delete(1);
+//        tree.print();
+//        System.out.println("--------------------------");
+//        tree.delete(3);
+//        tree.print();
+//        System.out.println("--------------------------");
+//        tree.delete(5);
+//        tree.print();
+//        System.out.println("--------------------------");
+//        tree.delete(12);
+//        tree.print();
+//
+//    }
 
-        bt.add(7);
-        bt.add(11);
-        bt.add(3);
-        bt.add(13);
-        bt.add(9);
-        bt.add(5);
-        bt.add(1);
-        bt.add(14);
-        bt.add(12);
-        bt.add(10);
-        bt.add(8);
-        bt.add(6);
-        bt.add(4);
-        bt.add(2);
-        bt.add(0);
-        bt.print();
-        bt.delete(11);
-        System.out.println("--------------------------");
-        bt.print();
-        System.out.println("--------------------------");
-        bt.delete(14);
-        bt.print();
-        System.out.println("--------------------------");
-        bt.delete(7);
-        bt.print();
-        System.out.println("--------------------------");
-        bt.delete(1);
-        bt.print();
-        System.out.println("--------------------------");
 
 
+    public static void main(String...args) {
+        AVLTree t = new AVLTree();
+        t.add(50); t.add(60); t.add(40); t.add(30); t.add(20); t.add(70); t.add(25);
+        t.delete(30);
+        t.print();
     }
 
 }
