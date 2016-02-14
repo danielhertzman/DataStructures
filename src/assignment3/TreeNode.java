@@ -123,8 +123,8 @@ public class TreeNode {
     Compare the result from BinaryTree and AVLTree
      */
 //    public static void main(String[] args) {
-////        BinaryTree tree = new BinaryTree();
-//        AVLTree tree = new AVLTree();
+//        BinaryTree tree = new BinaryTree();
+////        AVLTree tree = new AVLTree();
 //
 //        tree.add(7);
 //        tree.add(11);

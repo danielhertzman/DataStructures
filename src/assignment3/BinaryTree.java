@@ -258,5 +258,7 @@ public class BinaryTree {
     public void print() {
 
         root.printTree();
+        System.out.println();
+        inOrder(root);
     }
 }

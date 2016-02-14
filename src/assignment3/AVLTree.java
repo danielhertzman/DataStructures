@@ -186,7 +186,7 @@ public class AVLTree extends BinaryTree {
         }
 
         current.setHeight();
-        inOrder(current);
+        current = balance(current);
         return current;
 
     }
@@ -216,6 +216,8 @@ public class AVLTree extends BinaryTree {
     public void print() {
 
         root.printTree();
+        System.out.println();
+        inOrder(root);
     }
 
 }
